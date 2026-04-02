@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khasdar Mahotsav Registration</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.container {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* TITLE */
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00ffd5;
+}
+
+/* INPUT */
+.input-box {
+    margin: 15px 0;
+}
+
+.input-box input, 
+.input-box select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #00ffd5;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #00bfa6;
+}
+
+/* GLOW EFFECT */
+.glow {
+    text-shadow: 0 0 10px #00ffd5;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 class="glow">🎉 Khasdar Mahotsav</h2>
+
+    <form>
+
+        <div class="input-box">
+            <input type="text" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-box">
+            <input type="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="input-box">
+            <input type="tel" placeholder="Phone Number" required>
+        </div>
+
+        <div class="input-box">
+            <select required>
+                <option value="">Select Ticket Type</option>
+                <option>VIP Pass</option>
+                <option>Normal Pass</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <input type="number" placeholder="Number of Tickets" required>
+        </div>
+
+        <button type="submit" class="btn">Register Now 🚀</button>
+
+    </form>
+</div>
+
+</body>
+</html>
