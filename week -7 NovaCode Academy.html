@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NovaCode Academy</title>
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+<style>
+
+/* 3D canvas */
+
+#bgCanvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
+/* overlay */
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8));
+z-index:-1;
+}
+
+/* glass UI */
+
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+}
+
+/* glow title */
+
+.glow{
+background:linear-gradient(90deg,#ff7a18,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* floating animation */
+
+.float{
+animation:float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+100%{transform:translateY(0)}
+}
+
+/* chatbot */
+
+#chatbot{
+position:fixed;
+bottom:20px;
+right:20px;
+width:320px;
+display:none;
+}
+
+/* particles */
+
+.particle{
+position:absolute;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:.6;
+animation:move 10s linear infinite;
+}
+
+@keyframes move{
+0%{transform:translateY(0)}
+100%{transform:translateY(-100vh)}
+}
+
+</style>
+</head>
+
+<body class="text-white font-sans">
+
+<canvas id="bgCanvas"></canvas>
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+
+<nav class="flex justify-between items-center p-6">
+
+<h1 class="text-2xl font-bold glow">NovaCode Academy</h1>
+
+<div class="space-x-6">
+<a href="#">Courses</a>
+<a href="#">Pricing</a>
+<a href="#">FAQ</a>
+<button onclick="openLogin()" class="bg-orange-500 px-4 py-2 rounded">Login</button>
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="text-center mt-24 px-6">
+
+<h2 class="text-5xl font-bold glow mb-6 float">
+
+Master Web Development <br> From Zero to Pro 🚀
+
+</h2>
+
+<p class="max-w-xl mx-auto text-gray-300">
+
+Learn HTML, CSS, JavaScript, React, Next.js and build real projects.
+
+</p>
+
+<button class="mt-8 bg-gradient-to-r from-orange-500 to-pink-500 px-8 py-4 rounded-full text-lg">
+
+Start Learning
+
+</button>
+
+</section>
+
+<!-- COURSES -->
+
+<section class="mt-32 px-10">
+
+<h2 class="text-3xl font-bold mb-10 text-center">Popular Courses</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="glass p-6">
+
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" class="rounded mb-4">
+
+<h3 class="text-xl font-bold">Full Stack Bootcamp</h3>
+
+<p class="text-gray-300">HTML, CSS, JS, React, Node</p>
+
+<button class="mt-4 bg-orange-500 px-4 py-2 rounded">View Course</button>
+
+</div>
+
+<div class="glass p-6">
+
+<img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c" class="rounded mb-4">
+
+<h3 class="text-xl font-bold">React + Next.js</h3>
+
+<p class="text-gray-300">Modern Frontend Development</p>
+
+<button class="mt-4 bg-orange-500 px-4 py-2 rounded">View Course</button>
+
+</div>
+
+<div class="glass p-6">
+
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475" class="rounded mb-4">
+
+<h3 class="text-xl font-bold">JavaScript Mastery</h3>
+
+<p class="text-gray-300">From basics to advanced</p>
+
+<button class="mt-4 bg-orange-500 px-4 py-2 rounded">View Course</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRICING -->
+
+<section class="mt-32 text-center px-6">
+
+<h2 class="text-3xl font-bold mb-10">Pricing</h2>
+
+<div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+<div class="glass p-8">
+
+<h3 class="text-xl font-bold">Starter</h3>
+
+<p class="text-4xl mt-4">$19</p>
+
+<p class="text-gray-400">per month</p>
+
+<button class="mt-6 bg-orange-500 px-6 py-2 rounded">Join</button>
+
+</div>
+
+<div class="glass p-8 border-2 border-orange-500">
+
+<h3 class="text-xl font-bold">Pro</h3>
+
+<p class="text-4xl mt-4">$49</p>
+
+<p class="text-gray-400">per month</p>
+
+<button class="mt-6 bg-orange-500 px-6 py-2 rounded">Join</button>
+
+</div>
+
+<div class="glass p-8">
+
+<h3 class="text-xl font-bold">Lifetime</h3>
+
+<p class="text-4xl mt-4">$199</p>
+
+<p class="text-gray-400">one time</p>
+
+<button class="mt-6 bg-orange-500 px-6 py-2 rounded">Join</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DASHBOARD PREVIEW -->
+
+<section class="mt-32 px-10">
+
+<h2 class="text-3xl font-bold text-center mb-10">Student Dashboard</h2>
+
+<div class="glass p-10 max-w-4xl mx-auto">
+
+<div class="flex justify-between mb-6">
+
+<p>HTML Course Progress</p>
+
+<p>70%</p>
+
+</div>
+
+<div class="w-full bg-gray-700 h-4 rounded">
+
+<div class="bg-orange-500 h-4 rounded" style="width:70%"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FAQ -->
+
+<section class="mt-32 px-6 max-w-3xl mx-auto">
+
+<h2 class="text-3xl font-bold text-center mb-10">FAQ</h2>
+
+<div class="glass p-6 mb-4 cursor-pointer" onclick="toggleFaq(this)">
+What will I learn?
+<p class="hidden text-gray-300 mt-2">Full stack web development.</p>
+</div>
+
+<div class="glass p-6 mb-4 cursor-pointer" onclick="toggleFaq(this)">
+Do I get certificate?
+<p class="hidden text-gray-300 mt-2">Yes after completing course.</p>
+</div>
+
+</section>
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-70">
+
+<div class="glass p-10 w-80">
+
+<h2 class="text-xl font-bold mb-4">Login</h2>
+
+<input placeholder="Email" class="w-full p-2 mb-4 text-black">
+
+<input placeholder="Password" type="password" class="w-full p-2 mb-4 text-black">
+
+<button class="w-full bg-orange-500 py-2 rounded">Login</button>
+
+<button onclick="closeLogin()" class="mt-4 text-sm">Close</button>
+
+</div>
+
+</div>
+
+<!-- CHATBOT -->
+
+<div id="chatbot" class="glass p-4">
+
+<h3 class="font-bold mb-2">AI Assistant</h3>
+
+<div id="chatMessages" class="h-40 overflow-y-auto text-sm"></div>
+
+<input id="chatInput" placeholder="Ask something..." class="w-full mt-2 p-2 text-black">
+
+</div>
+
+<button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-orange-500 p-4 rounded-full">💬</button>
+
+<script>
+
+/* LOGIN */
+
+function openLogin(){
+document.getElementById("loginModal").style.display="flex"
+}
+
+function closeLogin(){
+document.getElementById("loginModal").style.display="none"
+}
+
+/* FAQ */
+
+function toggleFaq(el){
+el.querySelector("p").classList.toggle("hidden")
+}
+
+/* CHATBOT */
+
+function toggleChat(){
+let c=document.getElementById("chatbot")
+c.style.display=c.style.display=="none"?"block":"none"
+}
+
+document.getElementById("chatInput").addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+
+let msg=this.value
+
+let chat=document.getElementById("chatMessages")
+
+chat.innerHTML+=`<div>You: ${msg}</div>`
+chat.innerHTML+=`<div class="text-orange-400">AI: Great question! We'll help you learn that.</div>`
+
+this.value=""
+
+}
+
+})
+
+/* THREE JS BACKGROUND */
+
+const scene=new THREE.Scene()
+
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
+
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById("bgCanvas"),alpha:true})
+
+renderer.setSize(window.innerWidth,window.innerHeight)
+
+const geometry=new THREE.IcosahedronGeometry(4,1)
+
+const material=new THREE.MeshStandardMaterial({
+color:0xff7a18,
+wireframe:true
+})
+
+const sphere=new THREE.Mesh(geometry,material)
+
+scene.add(sphere)
+
+const light=new THREE.PointLight(0xffffff,1)
+light.position.set(10,10,10)
+
+scene.add(light)
+
+camera.position.z=10
+
+function animate(){
+
+requestAnimationFrame(animate)
+
+sphere.rotation.x+=0.003
+sphere.rotation.y+=0.004
+
+renderer.render(scene,camera)
+
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
