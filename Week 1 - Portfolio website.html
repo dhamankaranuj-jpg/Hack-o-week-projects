@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anuj Dhamankar | Portfolio</title>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+    --bg-color: #0f172a;
+    --text-color: #ffffff;
+    --accent: #38bdf8;
+}
+
+body.light {
+    --bg-color: #ffffff;
+    --text-color: #111;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.4s;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+}
+
+/* GLOW TEXT */
+.glow {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+/* TYPING EFFECT */
+.typing {
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 4s steps(30, end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: var(--accent);
+    color: black;
+}
+
+/* SOCIAL ICONS */
+.icons a {
+    margin: 10px;
+    font-size: 20px;
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+.icons a:hover {
+    color: var(--accent);
+}
+
+/* SECTION */
+section {
+    padding: 50px;
+}
+
+/* PROJECT CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* TOGGLE BUTTON */
+.toggle {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    font-size: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Anuj</h2>
+    <div>
+        <span class="toggle" onclick="toggleMode()">🌙</span>
+    </div>
+</header>
+
+<section class="hero">
+
+    <!-- YOUR IMAGE -->
+    <img src="your-image.jpg">
+
+    <h1>Hello, I'm <span class="glow">Anuj Dhamankar</span></h1>
+
+    <p class="typing">Student at Symbiosis Institute of Technology, Nagpur</p>
+
+    <br>
+
+    <!-- BUTTONS -->
+    <a href="#" class="btn" download>📄 Download Resume</a>
+
+    <div class="icons">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+</section>
+
+<section>
+    <h2>About Me</h2>
+    <p>
+        I am a passionate developer who loves building modern web applications and exploring new technologies.
+    </p>
+</section>
+
+<section>
+    <h2>Projects</h2>
+
+    <div class="card">
+        <h3>AI Chatbot</h3>
+        <p>Health & wellness assistant</p>
+    </div>
+
+    <div class="card">
+        <h3>Event Website</h3>
+        <p>Online registration system</p>
+    </div>
+
+</section>
+
+<section>
+    <h2>Contact</h2>
+    <p>📧 dhamankaranuj@gmail.com</p>
+    <p>📱 9270387679</p>
+</section>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/919270387679" class="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>
