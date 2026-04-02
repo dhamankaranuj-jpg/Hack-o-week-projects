@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Grand Royale – Digital Menu</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    overflow:hidden;
+}
+
+/* ===== SLIDER ===== */
+.viewport{width:100vw;height:100vh;overflow:hidden;}
+.track{
+    display:flex;
+    width:400vw;
+    height:100vh;
+    transition:transform .9s cubic-bezier(.77,0,.175,1);
+}
+.slide{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    background-size:cover;
+    background-position:center;
+}
+.slide::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.65);
+}
+
+/* ===== CONTENT ===== */
+.content{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    height:100%;
+    padding:60px;
+    overflow-y:auto;
+}
+
+/* Auto vertical scroll */
+.auto-scroll{
+    animation:autoScroll 45s linear infinite;
+}
+@keyframes autoScroll{
+    0%{scroll-top:0;}
+    100%{scroll-top:100%;}
+}
+
+/* ===== COVER ===== */
+.cover{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.cover h1{
+    font-family:'Cinzel',serif;
+    font-size:4rem;
+    color:#d4af37;
+}
+.cover p{letter-spacing:4px;margin-top:10px}
+
+/* ===== MENU ===== */
+.brand{
+    font-family:'Cinzel',serif;
+    text-align:center;
+    color:#d4af37;
+}
+.cat{
+    font-family:'Playfair Display',serif;
+    font-size:36px;
+    text-align:center;
+    margin:20px 0 30px;
+}
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:15px 40px;
+}
+.item{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px dotted rgba(255,255,255,.4);
+    padding:6px 0;
+}
+.price{font-weight:600}
+
+/* ===== CONTACT ===== */
+.contact{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+}
+.contact h2{
+    font-family:'Playfair Display',serif;
+    color:#d4af37;
+    margin:10px 0;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    background:#fff;
+    z-index:10;
+}
+.btn:hover{background:#d4af37}
+.btn-l{left:20px}
+.btn-r{right:20px}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    .cover h1{font-size:2.5rem}
+    .content{padding:30px}
+}
+</style>
+</head>
+
+<body>
+
+<button class="btn btn-l" onclick="moveSlide(-1)">❮</button>
+<button class="btn btn-r" onclick="moveSlide(1)">❯</button>
+
+<div class="viewport" id="viewport">
+<div class="track" id="track">
+
+<!-- COVER -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80')">
+<div class="content cover">
+<p>Welcome To</p>
+<h1>THE GRAND ROYALE</h1>
+<p>Luxury Dining Since 1998</p>
+</div>
+</div>
+
+<!-- VEG -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1920&q=80')">
+<div class="content auto-scroll">
+<div class="brand">The Grand Royale</div>
+<div class="cat">Pure Vegetarian</div>
+<div class="menu-grid" id="veg"></div>
+</div>
+</div>
+
+<!-- NON VEG -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1604908177522-0402f6a2c7b3?auto=format&fit=crop&w=1920&q=80')">
+<div class="content auto-scroll">
+<div class="brand">The Grand Royale</div>
+<div class="cat">Non-Vegetarian</div>
+<div class="menu-grid" id="nv"></div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80')">
+<div class="content contact">
+<h2>📍 Find Us</h2>
+<p>123 Royal Plaza, Mumbai – 400001</p>
+<h2>📞 Reservations</h2>
+<p>+91 98765 43210</p>
+<p>info@grandroyale.com</p>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+/* ===== MENU DATA ===== */
+const veg=[
+"Paneer Tikka","Paneer Butter Masala","Kadai Paneer","Shahi Paneer","Paneer Do Pyaza",
+"Paneer Bhurji","Paneer Pasanda","Handi Paneer","Malai Kofta","Navratan Korma",
+"Veg Kolhapuri","Veg Jalfrezi","Veg Makhanwala","Mix Veg","Tawa Sabzi",
+"Chana Masala","Chole Punjabi","Rajma Masala","Dal Fry","Dal Tadka",
+"Dal Makhani","Palak Paneer","Corn Palak","Methi Matar Malai","Aloo Gobi",
+"Dum Aloo","Jeera Aloo","Baingan Bharta","Bhindi Fry","Mushroom Masala",
+"Mushroom Do Pyaza","Soya Chaap","Veg Biryani","Jeera Rice","Peas Pulao",
+"Veg Pulao","Butter Naan","Garlic Naan","Laccha Paratha","Missi Roti",
+"Plain Rice","Veg Fried Rice","Veg Manchurian","Gobi Manchurian","Veg 65",
+"Baby Corn Masala","Kaju Curry","Curd Rice","Dal Khichdi"
+];
+
+const nv=[
+"Butter Chicken","Chicken Tikka Masala","Chicken Kadai","Chicken Handi","Chicken Rara",
+"Chicken Masala","Chicken Korma","Tandoori Chicken","Chicken Seekh Kebab","Chicken Lollipop",
+"Chicken 65","Chilli Chicken","Garlic Chicken","Chicken Wings","Chicken Fried Rice",
+"Mutton Rogan Josh","Mutton Masala","Mutton Korma","Mutton Keema","Mutton Biryani",
+"Egg Curry","Egg Masala","Egg Bhurji","Egg Biryani","Fish Curry",
+"Fish Fry","Fish Tikka","Fish Amritsari","Prawns Masala","Prawns Fry",
+"Garlic Prawns","Prawn Biryani","Chicken Biryani","Hyderabadi Chicken Biryani","Lemon Chicken",
+"Chicken Saag","Chicken Kali Mirch","Chicken Chettinad","Chicken Pepper Fry","Chicken Reshmi Kebab",
+"Chicken Afghani","Chicken Stew","Chicken Manchurian","Chicken Do Pyaza","Chicken Tikka",
+"Chicken Kebab","Mutton Handi","Mutton Bhuna","Nalli Nihari"
+];
+
+function fill(id,list){
+    const el=document.getElementById(id);
+    list.forEach((i,n)=>{
+        el.innerHTML+=`
+        <div class="item">
+            <span>${i}</span>
+            <span class="price">₹${220+(n%10)*20}</span>
+        </div>`;
+    });
+}
+fill("veg",veg);
+fill("nv",nv);
+
+/* ===== SLIDER ===== */
+let current=0;
+function moveSlide(d){
+    current=(current+d+4)%4;
+    track.style.transform=`translateX(-${current*100}vw)`;
+}
+
+/* ===== AUTO SLIDE ===== */
+setInterval(()=>moveSlide(1),10000);
+
+/* ===== TOUCH SWIPE ===== */
+let startX=0;
+const viewport=document.getElementById("viewport");
+
+viewport.addEventListener("touchstart",e=>{
+    startX=e.touches[0].clientX;
+});
+viewport.addEventListener("touchend",e=>{
+    let diff=startX-e.changedTouches[0].clientX;
+    if(diff>50) moveSlide(1);
+    if(diff<-50) moveSlide(-1);
+});
+</script>
+
+</body>
+</html>
